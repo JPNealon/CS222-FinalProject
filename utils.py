@@ -3,7 +3,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 #Read in the raw, unprocessed data into a pandas dataframe
-jack_df = pd.read_json("JackStreamHistory.json")
+temp1_df = pd.read_json("JackStreamHist1.json")
+temp2_df = pd.read_json("JackStreamHist2.json")
+jack_df = pd.concat([temp1_df, temp2_df], ignore_index=True)
+
 jack_df.fillna(np.nan, inplace=True)
 jack_df[['Date','Time']] = jack_df.endTime.str.split(expand=True)
 jack_df = jack_df.drop('endTime', axis=1)
