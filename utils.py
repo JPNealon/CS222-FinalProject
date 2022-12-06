@@ -14,12 +14,12 @@ jack_df['msPlayed'] = jack_df['msPlayed'] / 1000
 #print(jack_df)
 jack_df[['Year','Month','Day']] = jack_df.Date.str.split(pat='-', expand=True)
 jack_df = jack_df.drop('Date', axis=1)
-print(jack_df)
-'''
+#print(jack_df)
+
 temp3_df = pd.read_json("RyderStreamHist.json")
 print(temp3_df)
 temp3_df[["temp1", "temp2"]] = temp3_df.artist.str.split(expand=True)
-print(temp3_df)'''
+print(temp3_df)
 
 '''
 To-do cleaning:
