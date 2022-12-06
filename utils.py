@@ -15,3 +15,5 @@ jack_df['msPlayed'] = jack_df['msPlayed'] / 1000
 
 temp3_df = pd.read_json("RyderStreamHist.json")
 print(temp3_df)
+temp3_df[["temp1", "temp2"]] = temp3_df.artist.str.split(expand=True)
+print(temp3_df)
