@@ -11,4 +11,7 @@ jack_df.fillna(np.nan, inplace=True)
 jack_df[['Date','Time']] = jack_df.endTime.str.split(expand=True)
 jack_df = jack_df.drop('endTime', axis=1)
 jack_df['msPlayed'] = jack_df['msPlayed'] / 1000
-print(jack_df)
+#print(jack_df)
+
+temp3_df = pd.read_json("RyderStreamHist.json")
+print(temp3_df)
