@@ -96,7 +96,7 @@ def graph_ryder_monthly_plays(ryder_df):
 
 def graph_ryder_favorite_artists(ryder_df):
     artists_df = ryder_df["artist"].value_counts()
-    artists_df.drop("Andrew Schulz's Flagrant with Akaash Singh", axis=0)
+    #artists_df.drop("Andrew Schulz's Flagrant with Akaash Singh", axis=0)
     plt.bar(artists_df.index[0:24], artists_df[0:24])
     plt.xticks(rotation=45, ha="right")
     plt.title("Ryder - Artist's total songs played")
@@ -148,4 +148,4 @@ def get_kNN(avg_df):
     X_test = pd.Series([3], index=avg_df.columns.drop("avg"))
     X_test = scaler.transform([X_test])
     y_test_prediction = knn_clf.predict(X_test)
-    print(y_test_prediction)
+    print("Prediction: ", y_test_prediction)
