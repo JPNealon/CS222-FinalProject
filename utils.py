@@ -122,10 +122,9 @@ def get_both_monthly_avgs(jack_df, ryder_df):
 
     return jack_avg_df, ryder_avg_df
 
-def get_jack_kNN(jack_avg_df):
-    print(jack_avg_df)
-    X = jack_avg_df.drop('avg',axis=1)
-    y = jack_avg_df['avg']
+def get_decision_tree(avg_df):
+    X = avg_df.drop('avg',axis=1)
+    y = avg_df['avg']
 
     tree_clf = DecisionTreeClassifier(random_state=0, max_depth=3)
 
@@ -134,11 +133,14 @@ def get_jack_kNN(jack_avg_df):
     plt.figure(figsize=(16, 9))
     plot_tree(tree_clf, feature_names=X.columns, filled=True, fontsize=10)
 
+def get_kNN(avg_df):
+    X = avg_df.drop('avg',axis=1)
+    y = avg_df['avg']
     scaler = MinMaxScaler()
     scaler.fit(X)
     X_normalized = scaler.transform(X)
 
-    X_train, X_test, y_train, y_test = train_test_split(X_normalized, y, random_state=0, stratify=y)
+    X_train, X_test, y_train, y_test = train_test_split(X_normalized, y, random_state=0)
 
     knn_clf = KNeighborsClassifier(n_neighbors=3)
     knn_clf.fit(X_train, y_train)
