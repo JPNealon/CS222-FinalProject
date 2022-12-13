@@ -8,13 +8,13 @@ ryder_df = ryder_df.drop(['url', 'image', 'mbid', 'streamable'], axis=1)
 #ARTIST 
 ryder_df[['temp1', 'temp2', 'artist']] = ryder_df["artist"].apply(lambda x: pd.Series(str(x).split(":")))
 ryder_df = ryder_df.drop(['temp1','temp2'], axis=1)
-ryder_df['artist'] = ryder_df['artist'].str.replace('}','')
+ryder_df['artist'] = ryder_df['artist'].str.replace('}','',regex=True)
 ryder_df['artist'] = ryder_df['artist'].str.replace("'",'')
 
 #ALBUM
 ryder_df[['temp1', 'temp2', 'album', 'temp4']] = ryder_df["album"].apply(lambda x: pd.Series(str(x).split(":")))
 ryder_df = ryder_df.drop(['temp1', 'temp2', 'temp4'], axis=1)
-ryder_df['album'] = ryder_df['album'].str.replace('}','')
+ryder_df['album'] = ryder_df['album'].str.replace('}','',regex=True)
 ryder_df['album'] = ryder_df['album'].str.replace("'",'')
 ryder_df['album'] = ryder_df['album'].str.replace('"','')
 
@@ -23,11 +23,12 @@ ryder_df[['temp1', 'date', 'time']] = ryder_df["date"].apply(lambda x: pd.Series
 ryder_df = ryder_df.drop(['temp1'], axis=1)
 ryder_df[['temp1', 'temp2', 'day', 'month', 'year']] = ryder_df["date"].apply(lambda x: pd.Series(str(x).split(" ")))
 ryder_df = ryder_df.drop(['temp1', 'temp2', 'date'], axis=1)
-ryder_df['time'] = ryder_df['time'].str.replace('}','')
+ryder_df['time'] = ryder_df['time'].str.replace('}','',regex=True)
 ryder_df['time'] = ryder_df['time'].str.replace("'",'')
 ryder_df['day'] = ryder_df['day'].str.replace("'",'')
 
-decoder = {'Jan' : 1 , 'Feb' : 2, 'Mar' : 3, 'Apr' : 4, 'May': 5, 'Jun': 6, 'Jul': 7, 'Aug': 8, 'Sep': 9, 'Oct': 10, 'Nov': 11, 'Dec':12}
+decoder = {'Jan' : 1 , 'Feb' : 2, 'Mar' : 3, 'Apr' : 4, 'May': 5, 'Jun': 6, 
+           'Jul': 7, 'Aug': 8, 'Sep': 9, 'Oct': 10, 'Nov': 11, 'Dec':12}
 ser = ryder_df["month"]
 for key in decoder:
     ser.replace(key, decoder[key], inplace=True)
