@@ -103,9 +103,9 @@ def graph_ryder_favorite_artists(ryder_df):
     plt.ylabel("Times Played")
     plt.tight_layout()
 
-def get_jack_kNN(jack_df):
-    X = jack_df.drop('Month', axis=1)
-    y = jack_df.Month
+def get_jack_kNN(jack_df, jack_avg_df):
+    X = jack_avg_df
+    y = jack_avg_df.index
 
     tree_clf = DecisionTreeClassifier(random_state=0, max_depth=3)
 
