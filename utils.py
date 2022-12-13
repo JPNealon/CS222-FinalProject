@@ -3,6 +3,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 import scipy.stats as stats
 
+"""
+Programmers: Jack Nealon and Ryder Gallagher
+Class: CPSC 222, Fall 2022, Dr. Gina Sprint
+Final Project 
+12/13/2022
+Description: This file contains the functions necessary to read in data, clean the data,
+             calculate statistics from the data, and display the data in a graph. I said 
+             data a bunch but I'm leaving it because it makes sense. :D
+""" 
+
 def read_files():
     ryder_df = pd.read_json("RyderStreamHist.json")
 
@@ -45,7 +55,6 @@ def clean_ryder_info(ryder_df):
     ryder_df['time'] = ryder_df['time'].str.replace('}','',regex=True)
     ryder_df['time'] = ryder_df['time'].str.replace("'",'')
     ryder_df['day'] = ryder_df['day'].str.replace("'",'')
-
     decoder = {'Jan' : 1 , 'Feb' : 2, 'Mar' : 3, 'Apr' : 4, 'May': 5, 'Jun': 6, 
             'Jul': 7, 'Aug': 8, 'Sep': 9, 'Oct': 10, 'Nov': 11, 'Dec':12}
     ser = ryder_df["month"]
