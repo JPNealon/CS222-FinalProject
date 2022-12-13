@@ -2,7 +2,11 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy.stats as stats
-
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.tree import plot_tree
 """
 Programmers: Jack Nealon and Ryder Gallagher
 Class: CPSC 222, Fall 2022, Dr. Gina Sprint
@@ -98,3 +102,24 @@ def graph_ryder_favorite_artists(ryder_df):
     plt.xlabel("Artist")
     plt.ylabel("Times Played")
     plt.tight_layout()
+
+def get_jack_kNN(jack_df):
+
+    X = jack_df.drop('Month', axis=1)
+    y = jack_df.Month
+
+    tree_clf = DecisionTreeClassifier(random_state=0, max_depth=3)
+
+    tree_clf.fit(X, y)
+
+    plt.figure(figsize=(16, 9))
+    plot_tree(tree_clf, feature_names=X.columns, class_names={1: "survived", 0: "died"}, filled=True, fontsize=10)
+
+    scaler = MinMaxScaler()
+    scaler.fit(X)
+    X_normalized = scaler.transform(X)
+
+    X_train, X_test, y_train, y_test = train_test_split(X_normalized, y, random_state=0, stratify=y)
+
+    knn_clf = KNeighborsClassifier(n_neighbors=3)
+    knn_clf.fit(X_train, y_train)
