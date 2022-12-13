@@ -123,8 +123,9 @@ def get_both_monthly_avgs(jack_df, ryder_df):
     return jack_avg_df, ryder_avg_df
 
 def get_jack_kNN(jack_avg_df):
-    X = jack_avg_df['avg']
-    y = jack_avg_df['Index']
+    print(jack_avg_df)
+    X = jack_avg_df.drop('avg',axis=1)
+    y = jack_avg_df['avg']
 
     tree_clf = DecisionTreeClassifier(random_state=0, max_depth=3)
 
