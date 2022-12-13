@@ -144,7 +144,7 @@ def get_kNN(avg_df):
 
     knn_clf = KNeighborsClassifier(n_neighbors=3)
     knn_clf.fit(X_train, y_train)
-    X_test = pd.Series([3, 7], index=avg_df.columns.drop("avg"))
+    X_test = pd.Series([3], index=avg_df.columns.drop("avg"))
     X_test = scaler.transform([X_test])
     y_test_prediction = knn_clf.predict(X_test)
     print(y_test_prediction)
