@@ -104,7 +104,6 @@ def graph_ryder_favorite_artists(ryder_df):
     plt.tight_layout()
 
 def get_jack_kNN(jack_df):
-
     X = jack_df.drop('Month', axis=1)
     y = jack_df.Month
 
