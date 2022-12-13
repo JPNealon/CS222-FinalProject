@@ -53,3 +53,21 @@ def clean_ryder_info(ryder_df):
         ser.replace(key, decoder[key], inplace=True)
 
     return ryder_df
+
+def graph_jack_monthly_plays(jack_df):
+    month_df = jack_df["Month"].value_counts(sort=False)
+    plt.bar(month_df.index, month_df)
+    plt.xticks(ha="right", rotation=45)
+    plt.title("Total Daily Plays")
+    plt.xlabel("Date")
+    plt.ylabel("Number of Songs Played")
+    plt.tight_layout()
+
+def graph_jack_favorite_artists(jack_df):
+    artists_df = jack_df["artistName"].value_counts()
+    plt.bar(artists_df.index[0:24], artists_df[0:24])
+    plt.xticks(rotation=45, ha="right")
+    plt.title("Artist's total songs played")
+    plt.xlabel("Artist")
+    plt.ylabel("Times Played")
+    plt.tight_layout()
