@@ -89,9 +89,9 @@ def graph_ryder_monthly_plays(ryder_df):
     month_df = ryder_df["month"].value_counts(sort=False)
     plt.bar(month_df.index, month_df)
     plt.xticks(ha="right", rotation=45)
-    plt.title("Total Monthly Plays")
+    plt.title("Ryder - Total Monthly Plays")
     plt.xlabel("Date")
-    plt.ylabel("Ryder - Number of Songs Played")
+    plt.ylabel("Number of Songs Played")
     plt.tight_layout()
 
 def graph_ryder_favorite_artists(ryder_df):
