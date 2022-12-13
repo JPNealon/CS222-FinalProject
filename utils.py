@@ -103,16 +103,35 @@ def graph_ryder_favorite_artists(ryder_df):
     plt.ylabel("Times Played")
     plt.tight_layout()
 
-def get_jack_kNN(jack_df, jack_avg_df):
-    X = jack_avg_df
-    y = jack_avg_df.index
+def get_both_monthly_avgs(jack_df, ryder_df):
+    jack_avg_df = pd.DataFrame()
+    jack_avg_ser = pd.Series(dtype=int)
+    jack_avg_ser["avg"] = jack_df['Month'].value_counts()
+    jack_avg_df['avg'] = jack_avg_ser['avg']
+    jack_avg_df = jack_avg_df.reset_index()
+    pd.to_numeric(jack_avg_df['avg'])
+    pd.to_numeric(jack_avg_df['index'])
+
+    ryder_avg_df = pd.DataFrame()
+    ryder_avg_ser = pd.Series(dtype=int)
+    ryder_avg_ser["avg"] = ryder_df['month'].value_counts()
+    ryder_avg_df['avg'] = ryder_avg_ser['avg']
+    ryder_avg_df = ryder_avg_df.reset_index()
+    pd.to_numeric(ryder_avg_df['avg'])
+    pd.to_numeric(ryder_avg_df['index'])
+
+    return jack_avg_df, ryder_avg_df
+
+def get_jack_kNN(jack_avg_df):
+    X = jack_avg_df['avg']
+    y = jack_avg_df['Index']
 
     tree_clf = DecisionTreeClassifier(random_state=0, max_depth=3)
 
     tree_clf.fit(X, y)
 
     plt.figure(figsize=(16, 9))
-    plot_tree(tree_clf, feature_names=X.columns, class_names={1: "survived", 0: "died"}, filled=True, fontsize=10)
+    plot_tree(tree_clf, feature_names=X.columns, filled=True, fontsize=10)
 
     scaler = MinMaxScaler()
     scaler.fit(X)
