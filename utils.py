@@ -78,6 +78,7 @@ def graph_jack_monthly_plays(jack_df):
 
 def graph_jack_favorite_artists(jack_df):
     artists_df = jack_df["artistName"].value_counts()
+    artists_df.drop("Andrew Schulz's Flagrant with Akaash Singh", axis=0)
     plt.bar(artists_df.index[0:24], artists_df[0:24])
     plt.xticks(rotation=45, ha="right")
     plt.title("Jack - Artist's total songs played")
@@ -96,7 +97,6 @@ def graph_ryder_monthly_plays(ryder_df):
 
 def graph_ryder_favorite_artists(ryder_df):
     artists_df = ryder_df["artist"].value_counts()
-    #artists_df.drop("Andrew Schulz's Flagrant with Akaash Singh", axis=0)
     plt.bar(artists_df.index[0:24], artists_df[0:24])
     plt.xticks(rotation=45, ha="right")
     plt.title("Ryder - Artist's total songs played")
