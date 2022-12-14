@@ -148,7 +148,7 @@ def get_kNN(avg_df):
     X_test = pd.Series([3], index=avg_df.columns.drop("avg"))
     X_test = scaler.transform([X_test])
     y_test_prediction = knn_clf.predict(X_test)
-    print("Prediction: ", y_test_prediction)
+    return y_test_prediction
 
 def get_november_plays(df ,x):
     nov_df = pd.DataFrame()
