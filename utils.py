@@ -30,7 +30,7 @@ def clean_jack_info(jack_df):
     jack_df[['Date','Time']] = jack_df.endTime.str.split(expand=True)
     jack_df = jack_df.drop('endTime', axis=1)
     jack_df['msPlayed'] = jack_df['msPlayed'] / 1000
-    jack_df[['Year','Month','Day']] = jack_df.Date.str.split(pat='-', expand=True)
+    jack_df[['year','month','day']] = jack_df.Date.str.split(pat='-', expand=True)
     jack_df = jack_df.drop('Date', axis=1)
     jack_df['artistName'] = jack_df['artistName'].str.replace("Andrew Schulz's Flagrant with Akaash Singh", 'AS Flagrant Podcast')
     return jack_df
@@ -69,9 +69,9 @@ def clean_ryder_info(ryder_df):
     return ryder_df
 
 def graph_jack_monthly_plays(jack_df):
-    month_df = jack_df["Month"].value_counts(sort=False)
+    month_df = jack_df["month"].value_counts(sort=False)
     plt.bar(month_df.index, month_df)
-    plt.xticks(ha="right", rotation=45)
+    plt.xticks(ha="right", rotation=0)
     plt.title("Jack - Total Monthly Plays")
     plt.xlabel("Month (2021-2022)")
     plt.ylabel("Number of Songs Played")
@@ -89,7 +89,7 @@ def graph_jack_favorite_artists(jack_df):
 def graph_ryder_monthly_plays(ryder_df):
     month_df = ryder_df["month"].value_counts(sort=False)
     plt.bar(month_df.index, month_df)
-    plt.xticks(ha="right", rotation=45)
+    plt.xticks(ha="right", rotation=0)
     plt.title("Ryder - Total Monthly Plays")
     plt.xlabel("Month (2022)")
     plt.ylabel("Number of Songs Played")
@@ -107,7 +107,7 @@ def graph_ryder_favorite_artists(ryder_df):
 def get_both_monthly_avgs(jack_df, ryder_df):
     jack_avg_df = pd.DataFrame()
     jack_avg_ser = pd.Series(dtype=int)
-    jack_avg_ser["avg"] = jack_df['Month'].value_counts()
+    jack_avg_ser["avg"] = jack_df['month'].value_counts()
     jack_avg_df['avg'] = jack_avg_ser['avg']
     jack_avg_df = jack_avg_df.reset_index()
     pd.to_numeric(jack_avg_df['avg'])
@@ -149,3 +149,12 @@ def get_kNN(avg_df):
     X_test = scaler.transform([X_test])
     y_test_prediction = knn_clf.predict(X_test)
     print("Prediction: ", y_test_prediction)
+
+def get_november_plays(df ,x):
+    nov_df = pd.DataFrame()
+    if x == 1:
+        nov_df = df.loc[df['month'] == '11']
+    if x == 2:
+        nov_df = df.loc[df['month'] == 11 ]
+    nov_df = nov_df.reset_index()
+    return nov_df
